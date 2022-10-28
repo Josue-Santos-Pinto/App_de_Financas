@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Balance from "../../components/Balance";
 import ListItem from '../../components/ListItem'
 import C from './style'
+import Actions from "../../components/Actions";
 
 // type 0 = despesas / type 1 = ganhos
 
@@ -12,11 +13,19 @@ const list = [
     { id: 3, label: 'Salario', value: '7.500,00',date:'22/09/2022',type: 1 },
 ]
 
+
+
 export default () => {
+
+  
+    
+
+
     return (
         <C.Container>
             <Header name={'Josué Santos'} />
             <Balance saldo='9.250,90' gastos='-527,00' />
+            <Actions />
             <C.Title>Ultimas movimentações</C.Title>
 
             <C.Listagem 

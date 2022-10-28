@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import styled from "styled-components/native";
+import {MotiView,AnimatePresence,MotiText} from 'moti'
 
 const Item = styled.TouchableOpacity`
     flex: 1;
@@ -21,25 +22,51 @@ const Label = styled.Text`
     font-weight: bold;
     font-size: 16px;
 `
-const Value = styled.Text`
-    font-size: 16px;
-    color: ${props=>props.color};
-    font-weight: bold;
+
+const Hide = styled.View`
+    margin-top: 6px;
+    width: 80px;
+    height: 10px;
+    background-color: #DADADA;
+    border-radius: 8px;
 `
 
 export default ({data}) => {
 
     const [showValue,setShowValue] = useState(false)
 
-
     return (
-        <Item>
+        <Item onPress={()=>setShowValue(!showValue)}>
             <ItemDate>{data.date}</ItemDate>
             <Content>
                 <Label>{data.label}</Label>
-                <Value color={data.type === 1 ? '#2ecc71' : '#e74c3c'}>
-                    {data.type === 1 ? `R$ ${data.value}`: `R$ -${data.value}`}
-                </Value>
+                {showValue ? (
+                    <AnimatePresence exitBeforeEnter>
+                        <MotiText 
+                            style={{
+                                fontSize: 16,
+                                color: data.type === 1 ? '#2ecc71' : '#e74c3c',
+                                fontWeight: 'bold'
+                            }}
+                            from={{
+                                translateX: 100
+                            }}
+                            animate={{
+                                translateX: 0
+                            }} 
+                            transition={{
+                                type:'spring',
+                                duration: 500
+                            }}     
+                        >
+                        {data.type === 1 ? `R$ ${data.value}`: `R$ -${data.value}`}
+                        </MotiText>
+                    </AnimatePresence>
+                ):(
+                    <AnimatePresence exitBeforeEnter>
+                        <Hide></Hide>
+                    </AnimatePresence>
+                )}
             </Content>
         </Item>
     )

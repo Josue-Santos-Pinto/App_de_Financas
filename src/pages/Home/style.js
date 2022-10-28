@@ -11,9 +11,7 @@ export default {
     Title: styled.Text`
         font-size: 18px;
         font-weight: bold;
-        margin-left: 14px;
-        margin-right: 14px;
-        margin-top: 14px;
+        margin: 14px;
     `,
     Listagem: styled.FlatList`
         margin-start: 14px;

@@ -1,20 +1,8 @@
 import React from "react";
 import styled from "styled-components/native";
+import {MotiView,MotiText} from 'moti'
 
-const Container = styled.View`
-    background-color: #FFF;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-start: 18px;
-    padding-end: 18px;
-    margin-top: -24px;
-    margin-start: 14px;
-    margin-end: 14px;
-    border-radius: 4px;
-    padding-top: 22px;
-    padding-bottom: 22px;
-    z-index: 99;
-`
+
 const Item = styled.View``
 const ItemTitle = styled.Text`
     font-size: 20px;
@@ -36,7 +24,35 @@ const ItemBalance = styled.Text`
 
 export default ({saldo,gastos}) => {
     return (
-        <Container>
+        <MotiView
+            style={{
+                backgroundColor: '#FFF',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingStart: 18,
+                paddingEnd: 18,
+                marginTop: -24,
+                marginStart: 14,
+                marginEnd: 14,
+                borderRadius: 4,
+                paddingTop: 22,
+                paddingBottom: 22,
+                zIndex: 99
+            }}
+            from={{
+                rotateX: '-100deg',
+                opacity: 0
+            }}
+            animate={{
+                rotateX: '0deg',
+                opacity: 1
+            }} 
+            transition={{
+                type:'timing',
+                duration: 900,
+                delay: 300
+            }}     
+        >
 
             <Item>
                 <ItemTitle>Saldo</ItemTitle>
@@ -54,6 +70,6 @@ export default ({saldo,gastos}) => {
                 </Content>
             </Item>
 
-        </Container>
+        </MotiView>
     )
 }
