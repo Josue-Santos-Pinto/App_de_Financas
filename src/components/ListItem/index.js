@@ -1,6 +1,7 @@
-import React, {useState,useEffect} from "react";
+import React, {useState,useEffect, useContext} from "react";
 import styled from "styled-components/native";
 import {MotiView,AnimatePresence,MotiText} from 'moti'
+import { Context } from "../../contexts/Context";
 
 const Item = styled.TouchableOpacity`
     flex: 1;
@@ -21,6 +22,7 @@ const Content = styled.View`
 const Label = styled.Text`
     font-weight: bold;
     font-size: 16px;
+    color: ${props=>props.theme == 'light' ? '#000': '#FFF'};
 `
 
 const Hide = styled.View`
@@ -32,14 +34,45 @@ const Hide = styled.View`
 `
 
 export default ({data}) => {
-
+    const {state,dispatch} = useContext(Context)
+    
     const [showValue,setShowValue] = useState(false)
+    
+    useEffect(()=>{
+        const changingSaldo = () => {
+            if(data.type == 1){
+                dispatch({
+                    type:'CHANGE_SALDO',
+                    payload: {
+                        saldo: data.value
+                    }
+                })
+            }
+        }
+        changingSaldo()
+    },[])
+
+    useEffect(()=>{
+        const changingGastos = () => {
+            if(data.type == 0){
+                dispatch({
+                    type:'CHANGE_GASTOS',
+                    payload: {
+                        gastos: data.value
+                    }
+                })
+            }
+        }
+        changingGastos()
+    },[])
+
+  
 
     return (
         <Item onPress={()=>setShowValue(!showValue)}>
             <ItemDate>{data.date}</ItemDate>
             <Content>
-                <Label>{data.label}</Label>
+                <Label theme={state.theme.status}>{data.label}</Label>
                 {showValue ? (
                     <AnimatePresence exitBeforeEnter>
                         <MotiText 
@@ -59,7 +92,7 @@ export default ({data}) => {
                                 duration: 500
                             }}     
                         >
-                        {data.type === 1 ? `R$ ${data.value}`: `R$ -${data.value}`}
+                        {data.type === 1 ? `R$ ${parseFloat(data.value).toFixed(2)}`: `R$ -${parseFloat(data.value).toFixed(2)}`}
                         </MotiText>
                     </AnimatePresence>
                 ):(

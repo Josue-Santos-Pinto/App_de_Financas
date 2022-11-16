@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components/native";
 import {MotiView,MotiText} from 'moti'
 
 
-const Item = styled.View``
+const Item = styled.View`
+    background-color: ${props=>props.theme == 'dark' ? '#2f3136':'#FFF'}
+`
 const ItemTitle = styled.Text`
     font-size: 20px;
     color: #DADADA;
@@ -22,11 +24,12 @@ const ItemBalance = styled.Text`
 `
 
 
-export default ({saldo,gastos}) => {
+export default ({saldo,gastos,theme}) => {
+
     return (
         <MotiView
             style={{
-                backgroundColor: '#FFF',
+                backgroundColor: theme == 'light' ? '#FFF' : '#2f3136',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 paddingStart: 18,
@@ -54,19 +57,19 @@ export default ({saldo,gastos}) => {
             }}     
         >
 
-            <Item>
-                <ItemTitle>Saldo</ItemTitle>
+            <Item theme={theme}>
+                <ItemTitle>Ganhos</ItemTitle>
                 <Content>
                     <ItemSymbol>R$</ItemSymbol>
                     <ItemBalance color={'#2ecc71'}>{saldo}</ItemBalance>
                 </Content>
             </Item>
 
-            <Item>
+            <Item theme={theme}>
                 <ItemTitle>Gastos</ItemTitle>
                 <Content>
                     <ItemSymbol>R$</ItemSymbol>
-                    <ItemBalance color={'#e74c3c'}>{gastos}</ItemBalance>
+                    <ItemBalance color={'#e74c3c'}>-{gastos}</ItemBalance>
                 </Content>
             </Item>
 

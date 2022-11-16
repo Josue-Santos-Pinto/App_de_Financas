@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StatusBar } from "react-native";
 import styled from "styled-components/native";
 import { Feather } from '@expo/vector-icons'
 import {MotiView,MotiText} from 'moti'
+import { Context } from "../../contexts/Context";
+import { useContext } from "react";
 
 const Container = styled.View`
     background-color: #8000ff;
@@ -21,10 +23,16 @@ const ButtonUser = styled.TouchableOpacity`
     align-items: center;
     border-radius: 22px;
 `
+const Avatar = styled.Image`
+    width: 100%;
+    height: 100%;
+`
 
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight + 22 : 64
 
-export default ({name}) => {
+export default () => {
+    const {state,dispatch} = useContext(Context)
+
     return(
         <Container pad={statusBarHeight}>
             <MotiView 
@@ -66,10 +74,13 @@ export default ({name}) => {
                         delay: 800
                     }}       
                 >
-                    {name}
+                    {state.user.name}
                 </MotiText>
                 <ButtonUser activeOpacity={0.9}>
-                    <Feather name="user" size={27} color='#FFF' />
+                    <Avatar 
+                        source={require('../../assets/avatar.png')}
+                        resizeMode='contain'
+                    />
                 </ButtonUser>
             </MotiView>
         </Container>
