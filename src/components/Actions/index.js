@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components/native";
 import {AntDesign} from '@expo/vector-icons'
 import {MotiView,MotiText} from 'moti'
 import { useNavigation } from "@react-navigation/native";
 import { Context } from "../../contexts/Context";
+import { Modal } from "react-native";
 
 const Container = styled.ScrollView`
     max-height: 84px;
@@ -35,35 +36,37 @@ export default () => {
 
     const navigation = useNavigation()
     const {state,dispatch} = useContext(Context)
+    const [modal,setModal] = useState(false)
+
+   
 
     return (
         <Container horizontal={true} showsHorizontalScrollIndicator={false} theme={state.theme.status}>           
                 <ActionButton>
-                    <AreaButton theme={state.theme.status}>
+                    <AreaButton 
+                    onPress={()=>navigation.navigate('Expense')}
+                    theme={state.theme.status}>
                         <AntDesign name="addfolder" size={26} color={state.theme.status == 'light' ? '#000' : '#FFF'} />
                     </AreaButton>
                     <Text theme={state.theme.status}>Entradas</Text>
                 </ActionButton>
 
                 <ActionButton>
-                    <AreaButton theme={state.theme.status}>
+                    <AreaButton 
+                    onPress={()=>navigation.navigate('Purchase')}
+                    theme={state.theme.status}>
                         <AntDesign name="tagso" size={26} color={state.theme.status == 'light' ? '#000' : '#FFF'} />
                     </AreaButton>
                     <Text theme={state.theme.status}>Compras</Text>
                 </ActionButton>
 
                 <ActionButton>
-                    <AreaButton theme={state.theme.status}>
-                        <AntDesign name="creditcard" size={26} color={state.theme.status == 'light' ? '#000' : '#FFF'} />
+                    <AreaButton 
+                    onPress={()=>setModal(!modal)}
+                    theme={state.theme.status}>
+                        <AntDesign name="plus" size={26} color={state.theme.status == 'light' ? '#000' : '#FFF'} />
                     </AreaButton>
-                    <Text theme={state.theme.status}>Carteira</Text>
-                </ActionButton>
-
-                <ActionButton>
-                    <AreaButton theme={state.theme.status}>
-                        <AntDesign name="barcode" size={26} color={state.theme.status == 'light' ? '#000' : '#FFF'} />
-                    </AreaButton>
-                    <Text theme={state.theme.status}>Boletos</Text>
+                    <Text theme={state.theme.status}>Adicionar</Text>
                 </ActionButton>
 
                 <ActionButton>
@@ -74,6 +77,12 @@ export default () => {
                     </AreaButton>
                     <Text theme={state.theme.status}>Conta</Text>
                 </ActionButton>
+                <Modal
+                    visible={modal}
+                    transparent={false}
+                >
+
+                </Modal>
         </Container>
     )
 }
