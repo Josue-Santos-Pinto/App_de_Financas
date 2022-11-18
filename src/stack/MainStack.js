@@ -14,8 +14,12 @@ export default () => {
         }}>
             <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
             <Stack.Screen name="Account" component={Account} options={{title:'Minha Conta'}}/>
-            <Stack.Screen name="Expense" component={Expense} />
-            <Stack.Screen name="Purchase" component={Purchase} />
+            <Stack.Screen name="Expense" component={Expense} 
+            options={{title:'Entradas'}}
+            />
+            <Stack.Screen name="Purchase" component={Purchase} 
+            options={{title:'Saídas'}}
+            />
         </Stack.Navigator>
     )
 }

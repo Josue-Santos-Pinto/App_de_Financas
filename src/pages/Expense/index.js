@@ -3,12 +3,15 @@ import ExpenseItem from "../../components/ExpenseItem";
 import api from "../../api";
 import C from './style'
 import { Context } from "../../contexts/Context";
+import { useRoute } from "@react-navigation/native";
 
 export default () => {
     
     const {state,dispatch} = useContext(Context)
     
-    const [list,setList] = useState(api)
+    const route = useRoute()
+
+    const list = route.params.list
     
 
     return (

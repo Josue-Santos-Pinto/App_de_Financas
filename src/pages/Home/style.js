@@ -15,6 +15,8 @@ export default {
         color: ${props=>props.theme == 'light' ? '#000': '#FFF'};
     `,
     Listagem: styled.FlatList`
+        flex: 1;
+        margin-top: 10px;
         margin-start: 14px;
         margin-end: 14px;
     `

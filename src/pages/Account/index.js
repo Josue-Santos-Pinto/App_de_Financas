@@ -7,21 +7,21 @@ export default () => {
 
     const {state,dispatch} = useContext(Context)
 
-    const [isLight,setIsLight] = useState(true)
+    const [isDark,setIsDark] = useState(false)
 
    
 
     useEffect(()=>{
         if(state.theme.status == 'light'){
-            setIsLight(true)
+            setIsDark(false)
         } else {
-            setIsLight(false)
+            setIsDark(true)
         }
     },[])
 
     useEffect(()=>{
         const toogleTheme = () => {
-            if(isLight == true){
+            if(isDark == false){
                 dispatch({
                     type:'CHANGE_STATUS',
                     payload:{
@@ -39,7 +39,7 @@ export default () => {
         
         }
         toogleTheme()
-    },[isLight])
+    },[isDark])
 
     
 
@@ -66,10 +66,10 @@ export default () => {
             <C.InfoArea>
                 <C.InfoText theme={state.theme.status}>Tema</C.InfoText>
                 <Switch 
-                    trackColor={{true:'grey',false: '#FFF'}}
-                    thumbColor={isLight ? '#FFF':'#CCC'}
-                    onValueChange={()=>setIsLight(!isLight)}
-                    value={isLight}
+                    trackColor={{true:'#FFF',false: 'grey'}}
+                    thumbColor={isDark ? '#CCC':'#FFF'}
+                    onValueChange={()=>setIsDark(!isDark)}
+                    value={isDark}
                 />
             </C.InfoArea>
 

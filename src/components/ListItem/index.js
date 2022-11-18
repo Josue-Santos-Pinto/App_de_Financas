@@ -4,10 +4,11 @@ import {MotiView,AnimatePresence,MotiText} from 'moti'
 import { Context } from "../../contexts/Context";
 
 const Item = styled.TouchableOpacity`
-    flex: 1;
     margin-bottom: 24px;
     border-bottom-width: 0.5px;
     border-bottom-color: #DADADA;
+    width: 100%;
+    height: 60px;
 `
 const ItemDate = styled.Text`
     color: #DADADA;
